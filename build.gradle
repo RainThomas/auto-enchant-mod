@@ -1,11 +1,30 @@
-plugins { id 'fabric-loom' version '1.10-SNAPSHOT'; id 'maven-publish' }
-group='com.example.autoenchant'; version='1.1.1-1.21.8'
-repositories { maven { url='https://maven.fabricmc.net/' }; mavenCentral() }
-dependencies {
-  minecraft 'com.mojang:minecraft:1.21.8'
-  mappings loom.officialMojangMappings()
-  modImplementation 'net.fabricmc:fabric-loader:0.17.0'
-  modImplementation 'net.fabricmc.fabric-api:fabric-api:0.136.0+1.21.8'
+plugins {
+    id 'fabric-loom' version '1.10'   // 1.21.6~1.21.8 推薦 Loom 1.10
+    id 'maven-publish'
 }
-minecraft 'com.mojang:minecraft:1.21.1'
-modImplementation 'net.fabricmc.fabric-api:fabric-api:0.106.1+1.21.1'
+
+group = 'com.example.autoenchant'
+version = '1.1.1-1.21.8'
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    mavenCentral()
+}
+
+dependencies {
+    // Minecraft 1.21.8（確實存在）
+    minecraft 'com.mojang:minecraft:1.21.8'
+
+    // 官方 Mojang 對應
+    mappings loom.officialMojangMappings()
+
+    // Loader 與 Fabric API 指定對 1.21.8 的版本
+    modImplementation 'net.fabricmc:fabric-loader:0.16.14'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.136.0+1.21.8'
+}
+
+loom { splitEnvironmentSourceSets() }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
